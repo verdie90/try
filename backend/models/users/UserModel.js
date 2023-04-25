@@ -35,6 +35,14 @@ const Users = db.define('users',{
         validate:{
             notEmpty: true
         }
+    },
+    status :{
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+        validate:{
+            notEmpty: true,
+            isBoolean: true
+        }
     }
 },{
     freezeTableName: true
