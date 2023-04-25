@@ -1,15 +1,12 @@
 import RoleUsers from "../../models/users/RoleUserModel.js";
 import Users from "../../models/users/UserModel.js";
-import Roles from "../../models/users/RoleModel";
+import Roles from "../../models/users/RoleModel.js";
 import { Op } from "sequelize";
 
 export const getRoleUser = async (req, res) => {
     try {
         const response = await RoleUsers.findAll({
-            attributes: ['userId', 'roleId'],
-            where: {
-                userId: req.params.id
-            }
+            attributes: ['uuid', 'userUuid', 'roleUuid'],
         });
         res.status(200).json(response);
     } catch (error) {
@@ -20,9 +17,9 @@ export const getRoleUser = async (req, res) => {
 export const getRoleUserbyId = async (req, res) => {
     try {
         const response = await RoleUsers.findOne({
-            attributes: ['userId', 'roleId'],
+            attributes: ['uuid', 'userUuid', 'roleUuid'],
             where: {
-                userId: req.params.id
+                uuid : req.params.id
             }
         });
         res.status(200).json(response);
@@ -32,11 +29,11 @@ export const getRoleUserbyId = async (req, res) => {
 }
 
 export const createRoleUser = async (req, res) => {
-    const {userId, roleId} = req.body;
+    const {userUuid, roleUuid} = req.body;
     try {
         const response = await RoleUsers.create({
-            userId,
-            roleId
+            userUuid,
+            roleUuid
         });
         res.status(201).json({message: 'Role User Berhasil Dibuat'});
     }
@@ -48,20 +45,20 @@ export const createRoleUser = async (req, res) => {
 export const updateRoleUser = async (req, res) => {
     const roleUser = await RoleUsers.findOne({
         where: {
-            userId: req.params.id
+            uuid: req.params.id
         }
     });
     if(!roleUser){
         return res.status(404).json({message: 'Role User Tidak di Temukan'});
     }
-    const {userId, roleId} = req.body;
+    const {userUuid, roleUuid} = req.body;
     try {
         const response = await RoleUsers.update({
-            userId,
-            roleId
+            userUuid,
+            roleUuid
         }, {
             where: {
-                userId: req.params.id
+                uuid: req.params.id
             }
         });
         res.status(200).json({message: 'Role User Berhasil Diubah'});
@@ -74,7 +71,7 @@ export const updateRoleUser = async (req, res) => {
 export const deleteRoleUser = async (req, res) => {
     const roleUser = await RoleUsers.findOne({
         where: {
-            userId: req.params.id
+            uuid: req.params.id
         }
     });
     if(!roleUser){
@@ -83,7 +80,7 @@ export const deleteRoleUser = async (req, res) => {
     try {
         const response = await RoleUsers.destroy({
             where: {
-                userId: req.params.id
+                uuid: req.params.id
             }
         });
         res.status(200).json({message: 'Role User Berhasil Dihapus'});

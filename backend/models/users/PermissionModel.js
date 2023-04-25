@@ -21,7 +21,7 @@ const Permissions = db.define('permissions',{
             notEmpty: true
         }
     },
-    role_id : {
+    roleUuid : {
         type: DataTypes.STRING,
         allowNull: false,
         validate:{
@@ -33,6 +33,6 @@ const Permissions = db.define('permissions',{
 });
 
 Roles.hasMany(Permissions);
-Permissions.belongsTo(Roles, {foreignKey: 'role_id'});
+Permissions.belongsTo(Roles, {foreignKey: 'roleUuid'});
 
 export default Permissions;

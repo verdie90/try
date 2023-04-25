@@ -18,7 +18,6 @@ const Users = db.define('users',{
         allowNull: false,
         validate:{
             notEmpty: true,
-            unique: true,
             len: [3, 100]
         }
     },
@@ -38,12 +37,9 @@ const Users = db.define('users',{
         }
     },
     status :{
-        type: DataTypes.BOOLEAN,
-        defaultValue: true,
-        validate:{
-            notEmpty: true,
-            isBoolean: true
-        }
+        type: DataTypes.STRING,
+        defaultValue: 'active',
+        allowNull: false
     }
 },{
     freezeTableName: true

@@ -29,7 +29,7 @@ export const createRole = async (req, res) => {
     const {name} = req.body;
     try {
         const response = await Roles.create({
-            name
+            name: name,
         });
         res.status(201).json({message: 'Role Berhasil Dibuat'});
     }

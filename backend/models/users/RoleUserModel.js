@@ -15,20 +15,20 @@ const RoleUsers = db.define('role_users',{
             notEmpty: true
         }
     },
-    user_id: {
+    userUuid: {
         type: DataTypes.STRING,
         allowNull: false,
         references: {
             model: Users,
-            key: 'id'
+            key: 'uuid'
         }
     },
-    role_id: {
+    roleUuid: {
         type: DataTypes.STRING,
         allowNull: false,
         references: {
             model: Roles,
-            key: 'id'
+            key: 'uuid'
         }
     }
 },{
@@ -37,7 +37,7 @@ const RoleUsers = db.define('role_users',{
 
 Users.hasMany(RoleUsers);
 Roles.hasMany(RoleUsers);
-RoleUsers.belongsTo(Users, {foreignKey: 'user_id'});
-RoleUsers.belongsTo(Roles, {foreignKey: 'role_id'});
+RoleUsers.belongsTo(Users, {foreignKey: 'userUuid'});
+RoleUsers.belongsTo(Roles, {foreignKey: 'roleUuid'});
 
 export default RoleUsers;
