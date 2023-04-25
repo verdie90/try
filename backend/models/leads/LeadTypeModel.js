@@ -1,9 +1,7 @@
 import { Sequelize } from "sequelize";
 import db from "../../config/Database.js";
 
-const {DataTypes} = Sequelize;
-
-const Roles = db.define('roles',{
+const LeadsType = db.define('leads_type', {
     uuid:{
         type: DataTypes.STRING,
         defaultValue: DataTypes.UUIDV4,
@@ -13,15 +11,11 @@ const Roles = db.define('roles',{
             notEmpty: true
         }
     },
-    name:{
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate:{
-            notEmpty: true
-        }
-    }
-},{
-    freezeTableName: true
+    name: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+
 });
 
-export default Roles;
+export default LeadsType;

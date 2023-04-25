@@ -2,6 +2,15 @@ import { Sequelize } from "sequelize";
 import db from "../../config/Database.js";
 
 const Companys = db.define('companys', {
+    uuid:{
+        type: DataTypes.STRING,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+        primaryKey: true,
+        validate:{
+            notEmpty: true
+        }
+    },
     name: {
         type: Sequelize.STRING,
         allowNull: false,

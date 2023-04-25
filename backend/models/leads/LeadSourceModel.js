@@ -1,8 +1,8 @@
 import { Sequelize } from "sequelize";
 import db from "../../config/Database.js";
-import Users from "./UsersModel.js";
+import LeadsType from "./LeadTypeModel.js";
 
-const UserSettings = db.define('user_settings', {
+const LeadSource = db.define('lead_source', {
     uuid:{
         type: DataTypes.STRING,
         defaultValue: DataTypes.UUIDV4,
@@ -12,23 +12,19 @@ const UserSettings = db.define('user_settings', {
             notEmpty: true
         }
     },
-    user_id: {
+    name: {
         type: Sequelize.STRING,
-        allowNull: false,
-        references: {
-            model: Users,
-            key: 'id'
-        }
+        allowNull: false
     },
-    language: {
+    type_id: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
     }
 });
 
-Users.hasMany(UserSettings);
-UserSettings.belongsTo(Users, {
-    foreignKey: 'user_id',
+LeadsType.hasMany(LeadSource);
+LeadSource.belongsTo(LeadsType, {
+    foreignKey: 'type_id'
 });
 
-export default UserSettings;
+export default LeadSource;

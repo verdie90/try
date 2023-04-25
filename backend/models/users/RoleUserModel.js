@@ -6,8 +6,17 @@ import Roles from "./RoleModel.js";
 const {DataTypes} = Sequelize;
 
 const RoleUsers = db.define('role_users',{
+    uuid:{
+        type: DataTypes.STRING,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+        primaryKey: true,
+        validate:{
+            notEmpty: true
+        }
+    },
     user_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
         references: {
             model: Users,
@@ -15,7 +24,7 @@ const RoleUsers = db.define('role_users',{
         }
     },
     role_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
         references: {
             model: Roles,

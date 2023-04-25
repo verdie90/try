@@ -5,6 +5,15 @@ import Roles from "./RoleModel.js";
 const {DataTypes} = Sequelize;
 
 const Permissions = db.define('permissions',{
+    uuid:{
+        type: DataTypes.STRING,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+        primaryKey: true,
+        validate:{
+            notEmpty: true
+        }
+    },
     name:{
         type: DataTypes.STRING,
         allowNull: false,
@@ -13,7 +22,7 @@ const Permissions = db.define('permissions',{
         }
     },
     role_id : {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
         validate:{
             notEmpty: true

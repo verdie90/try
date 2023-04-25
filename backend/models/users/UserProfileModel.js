@@ -4,8 +4,17 @@ import Companys from "../company/CompanyModel.js";
 import Users from "./UserModel.js";
 
 const UserProfiles = db.define('user_profiles', {
+    uuid:{
+        type: DataTypes.STRING,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+        primaryKey: true,
+        validate:{
+            notEmpty: true
+        }
+    },
     user_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
         references: {
             model: Users,
@@ -13,7 +22,7 @@ const UserProfiles = db.define('user_profiles', {
         }
     },
     company_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
         references: {
             model: Companys,
